@@ -1,3 +1,10 @@
+# Installation
+
+Navigate to the directory you want to install the project in and run. Then run the following command:
+
+`git clone https://github.com/rudolfKischer/rendora.git`
+
+
 # Setup
 
 Make sure Python 3 is installed and venv is available
@@ -12,8 +19,10 @@ Then activate the enviroment with
 
 `source env/bin/activate`
 
-# Running
+# Start up
 
 To run the program, run
 
-`./app.py`
+`./run.py`
+
+# Development
