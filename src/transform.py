@@ -7,30 +7,41 @@ class Transform(object):
     Holds a position, an orientation, and a scale.
     """
 
-    def __init__(self, 
-                 position = np.zeros(3),
-                 orientation = np.zeros(3),
-                 scale = np.ones(3)
-                 ):
-        self._properties = {
-            "position": position,
-            "orientation": orientation,
-            "scale": scale,
-            "transform_matrix": get_model_matrix(position, orientation, scale),
-        }
-        self.update_flag = True
-    
-    def __getattr__(self, name):
-        return self._properties[name]
+    def __str__(self) -> str:
+        return "Transform: " + str(self.position) + " " + str(self.orientation) + " " + str(self.scale)
 
-    def __setattr__(self, name, value):
-        if name == "_properties":
-            self.__dict__[name] = value
-        if name == "update_flag":
-            self.__dict__[name] = value
-        else:
-            self._properties[name] = value
-            self.update_flag = True
+    def __init__(self, 
+                 position = None,
+                 orientation = None,
+                 scale = None
+                 ):
+
+        self.position = np.zeros(3)
+        self.orientation = np.zeros(3)
+        self.scale = np.ones(3)
+        if position:
+            self.position = position
+        if orientation:
+            self.orientation = orientation
+        if scale:
+            self.scale = scale
+
+        self.transform_matrix = get_model_matrix(self.position, self.orientation, self.scale)
+        # self.update_flag = True
+    
+    # def __getattr__(self, name):
+    #     if name in self._properties.keys():
+    #         return self._properties[name]
+    #     return self.__dict__[name]
+
+    # def __setattr__(self, name, value):
+    #     if name == "_properties":
+    #         self.__dict__[name] = value
+    #     if name == "update_flag":
+    #         self.__dict__[name] = value
+    #     else:
+    #         self._properties[name] = value
+    #         self.update_flag = True
 
     def update_transform_matrix(self):
         """
@@ -44,8 +55,8 @@ class Transform(object):
         Returns the transform matrix for this element.
         """
         # if the position, scale, or orientation have changed, update the transform matrix
-        if self.update_flag:
-            self.update_transform_matrix()
+        # if self.update_flag:
+        self.update_transform_matrix()
         return self.transform_matrix
     
     def transform(self, transform):
