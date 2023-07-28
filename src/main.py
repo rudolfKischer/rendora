@@ -37,14 +37,19 @@ def showScreen():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
     iterate()
-    SCENE_FUNCTION()
+    SCENE._update()
     glutSwapBuffers()
 
 def initialize():
+    #setup openGL
     glutInit()
     glutInitDisplayMode(GLUT_RGBA)
     glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT)
     glutInitWindowPosition(*WINDOW_POSITION)
+
+    #setup Scene
+    SCENE.setup()
+
 
 def main():
     initialize()

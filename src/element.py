@@ -76,6 +76,10 @@ class Element(object):
             name = self.get_new_born_name()
         self.children[name] = new_child
         new_child.parent = self
+    
+    def update(self):
+        for child in self.children:
+            child.update()
         
             
 

@@ -1,4 +1,4 @@
-from src import scenes
+from src.scenes.test_scenes import *
 
 # WINDOW SETTINGS
 WINDOW_WIDTH = 500
@@ -9,7 +9,7 @@ WINDOW_POSITION = (0, 0)
 #SCENE SETTINGS
 # SCENE_FUNCTION = scenes.default_scene
 # SCENE_FUNCTION = scenes.polygon_test
-SCENE_FUNCTION = scenes.circle_test
+SCENE = CircleTest()
 
 # VIEW SETTINGS
 # PROJECTION_MODE = "ORTHOGRAPHIC"
