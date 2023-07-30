@@ -59,10 +59,11 @@ def get_2d_line_normal(line_point_1, line_point_2):
     return segment_normal_vec
 
 def get_reflected_vec(incident, normal):
+    length = get_length(incident)
     incident = normalize(incident)
     normal = normalize(normal)
     projected_vec = projection(incident,normal)
-    return incident - 2 * projected_vec
+    return (incident - 2 * projected_vec) * length
 
 
 def get_distance_to_line(point, line_point_1, line_point_2):
@@ -80,3 +81,9 @@ def get_distance_to_line(point, line_point_1, line_point_2):
 
     distance_to_line = point - a_proj_b
     return get_length(distance_to_line)
+
+def threshold_vector(vec, threshold):
+    # if the vectors length is smaller than the threshold, return a zero vector
+    if get_length(vec) < threshold:
+        return np.zeros(vec.shape)
+    return vec

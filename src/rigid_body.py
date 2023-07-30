@@ -4,6 +4,10 @@ from src.collider import *
 from src.utils.vector import *
 from copy import deepcopy
 
+
+energy_loss = 0.999
+energy_threshold = 0.01
+
 class Rigid_Body(Element):
         
     def __init__(self,
@@ -50,17 +54,37 @@ class Rigid_Body(Element):
         vel = self.kinematic.velocity
         reflected_velocity = get_reflected_vec(vel, line_normal)
 
-
         # buffer translation
         # prevents oscilattion
         proj = normalize(projection(vel, line_normal))
-        buffer = 0.04
+        buffer = 0.03
         self.transform.position = self.parent.transform.position - (proj * buffer)
 
-        self.kinematic.velocity = reflected_velocity
+        self.kinematic.velocity = threshold_vector(reflected_velocity * energy_loss, energy_threshold)
 
-        
-        
+    def resolve_sphere_collision(self, other_body):
+        #get normal between two spheres
+        # the normal is just the line between the two centers
+        collision_normal = normalize(self.parent.transform.position - other_body.transform.position)
+        vel = self.kinematic.velocity
+
+        #calculate reflected vector from sphere 1
+        reflected_velocity_1 = get_reflected_vec(vel, collision_normal)
+
+        #calculate reflected vector from sphere 2
+        vel = other_body.kinematic.velocity
+        reflected_velocity_2 = get_reflected_vec(vel, collision_normal)
+
+        # buffer translation
+        # translates the spheres so that they are not overlapping
+        # prevents oscilattion
+        buffer = 0.003
+        self.transform.position = self.parent.transform.position + (collision_normal * buffer)
+        other_body.transform.position = other_body.parent.transform.position - (collision_normal * buffer)
+
+        #set the new velocities
+        self.kinematic.velocity = threshold_vector(reflected_velocity_1 * energy_loss, energy_threshold)
+        other_body.kinematic.velocity = threshold_vector(reflected_velocity_2 * energy_loss, energy_threshold)
 
     def collision(self, other_body):
         c1 = self.collider

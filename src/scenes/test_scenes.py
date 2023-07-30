@@ -21,7 +21,7 @@ from ..utils.vector import *
 
 class CircleTest(Scene):
     
-    def __init__(self, num_circles = 30, circle_speed = 2.5):
+    def __init__(self, num_circles = 10, circle_speed = 2.5):
         super().__init__()
         self.num_circles = num_circles
         self.speed = circle_speed
@@ -29,7 +29,9 @@ class CircleTest(Scene):
         
     def generate_circle(self):
         #generate a circle with a random color and a random size
-        circle = Circle(radius = rand() * 0.1, colors = [list(rand_vec(3))])
+        rand_val = rand()
+        radius = rand_val * 0.05 + 0.05
+        circle = Circle(radius = radius , colors = [[(rand_val),(0.0),(1-rand_val)]])
 
         #generate a random velocity
         direction = normalize(extend_vectors(np.array([rand_vec(2, include_negative=True)]), 3, 0.0)[0])
@@ -58,7 +60,14 @@ class CircleTest(Scene):
                     circle.rigid_body.resolve_sphere_line_collision(border)
 
             # circle.rigid_body.kinematic.velocity[1] -= 1.8 * delta_time
-            circle.update(delta_time)  
+            circle.update(delta_time)
+        
+        for circle_1 in circles:
+            for circle_2 in circles:
+                if circle_1 == circle_2:
+                    continue
+                if circle_1.rigid_body.sphere_collision(circle_2.rigid_body):
+                    circle_1.rigid_body.resolve_sphere_collision(circle_2.rigid_body)
 
 class PolygonTest(Scene):
     
