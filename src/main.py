@@ -9,15 +9,15 @@ import numpy as np
 
 def projection_mode():
     aspect_ratio = float(WINDOW_WIDTH) / float(WINDOW_HEIGHT)
-    gluPerspective(PERSPECTIVE_FOV, 
+    gluPerspective(SCENE.PERSPECTIVE_FOV, 
                   aspect_ratio, 
-                  PERSPECTIVE_NEAR_CLIP, 
-                  PERSPECTIVE_FAR_CLIP)
+                  SCENE.PERSPECTIVE_NEAR_CLIP, 
+                  SCENE.PERSPECTIVE_FAR_CLIP)
     glMatrixMode (GL_MODELVIEW)
     glLoadIdentity()
-    camera_position = PERSPECTIVE_DEFAULT_CAMERA_POSITION
+    camera_position = SCENE.PERSPECTIVE_DEFAULT_CAMERA_POSITION
     up_vector = (0.0, 1.0, 0.0)
-    look_at_vector = PERSPECTIVE_DEFAULT_CAMERA_LOOK_AT_DIRECTION
+    look_at_vector = SCENE.PERSPECTIVE_DEFAULT_CAMERA_LOOK_AT_DIRECTION
     gluLookAt(*camera_position, *look_at_vector, *up_vector)
     glTranslatef(*camera_position)
     
@@ -26,7 +26,7 @@ def iterate():
     glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
-    if PROJECTION_MODE:
+    if SCENE.PROJECTION_MODE:
         projection_mode()
     else:
         glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0)

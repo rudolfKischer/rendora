@@ -1,11 +1,11 @@
-from .element import Element
-from.transform import Transform
+from ..element import Element
+from..transform import Transform
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 import numpy as np
 
-from .utils.vector import reshape_vectors
+from ..utils.vector import reshape_vectors
 
 class Renderlet(Element):
     """

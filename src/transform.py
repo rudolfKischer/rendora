@@ -29,19 +29,6 @@ class Transform(object):
         self.transform_matrix = get_model_matrix(self.position, self.orientation, self.scale)
         # self.update_flag = True
     
-    # def __getattr__(self, name):
-    #     if name in self._properties.keys():
-    #         return self._properties[name]
-    #     return self.__dict__[name]
-
-    # def __setattr__(self, name, value):
-    #     if name == "_properties":
-    #         self.__dict__[name] = value
-    #     if name == "update_flag":
-    #         self.__dict__[name] = value
-    #     else:
-    #         self._properties[name] = value
-    #         self.update_flag = True
 
     def update_transform_matrix(self):
         """

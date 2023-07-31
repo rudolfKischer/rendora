@@ -1,6 +1,6 @@
 from .element import *
-from .rigid_body import *
-import src.renderlet
+from .physics.rigid_body import *
+import src.rendering.renderlet as renderlet
 
 class Entity(Element):
     
@@ -23,7 +23,7 @@ class Circle(Entity):
     
     def __init__(self, radius, colors):
         super().__init__(
-            src.renderlet.Circle(radius, colors),
+            renderlet.Circle(radius, colors),
             collider = BoundingSphere(radius=radius)            
         )
         self.radius = radius 

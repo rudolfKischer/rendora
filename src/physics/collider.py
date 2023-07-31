@@ -1,6 +1,6 @@
 from src.element import *
 import numpy as np
-from .utils.vector import *
+from src.utils.vector import *
 
 class Collider(Element):
     

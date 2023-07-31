@@ -1,4 +1,4 @@
-from src.collider import LineSegmentCollider
+from src.physics.collider import LineSegmentCollider
 import numpy as np
 from src.element import Element
 

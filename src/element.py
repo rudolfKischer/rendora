@@ -5,7 +5,6 @@ from src.transform import Transform
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-import config 
 from copy import deepcopy
 
 

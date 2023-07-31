@@ -1,6 +1,6 @@
-from src.kinematic import *
+from .kinematic import *
 from src.transform  import *
-from src.collider import *
+from .collider import *
 from src.utils.vector import *
 from copy import deepcopy
 

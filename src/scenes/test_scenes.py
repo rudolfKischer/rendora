@@ -2,16 +2,16 @@ from .scene import *
 import numpy as np
 from src.utils.vector import normalize, extend_vectors
 from src.entities import Circle
-from src.collider import LineSegmentCollider
+from src.physics.collider import LineSegmentCollider
 from src.utils.random import *
 from src.scenes.setup_functions import create_borders
 
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-from src.draw import square, triangle, surface
-from ..surface import Surface, Polygon
+from src.rendering.draw import square, triangle, surface
+from ..rendering.surface import Surface, Polygon
 from ..entities import Circle
-from ..collider import LineSegmentCollider
+from ..physics.collider import LineSegmentCollider
 import numpy as np
 import time
 from src.element import Element
